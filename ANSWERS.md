@@ -3,8 +3,14 @@
 1. How to run
 
 On a fresh machine, install Node.js and npm.
-Run npm install.
-Run npm run dev.
+
+Run:
+
+```bash
+npm install
+npm run dev
+```
+
 Open http://localhost:3000.
 
 No API key is required.
