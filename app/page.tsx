@@ -1,65 +1,87 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { Fraunces, Space_Grotesk } from "next/font/google";
+import "./globals.css";
+import RecommendationShell from "./components/RecommendationShell";
+
+const bodyFont = Space_Grotesk({ variable: "--font-body", subsets: ["latin"] });
+const displayFont = Fraunces({ variable: "--font-display", subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="flex-1">
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <header className="mb-14 max-w-3xl">
+          {/* <p className="text-xs uppercase tracking-[0.3em] text-ink-muted">
+            Smart Time Advisor
+          </p> */}
+          <h1 className="mt-5 text-4xl font-serif leading-tight text-ink md:text-5xl">
+            Find the calmest, cleanest time to step outside.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-4 text-lg text-ink-muted">
+            Weather and air quality, scored into a single recommendation you can trust.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </header>
+
+        <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="rounded-3xl border border-ink/10 bg-surface/80 p-6 shadow-soft backdrop-blur">
+            <div>
+              <p className="text-sm text-ink-muted">Search city</p>
+              <h3 className="mt-2 text-xl font-semibold text-ink">Find the best time for your location</h3>
+
+              <div className="mt-4">
+                {/* Client search component */}
+                <RecommendationShell />
+              </div>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                <div className="rounded-2xl border border-ink/10 bg-white/70 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-ink-muted">Best time</p>
+                  <p className="mt-2 text-lg font-semibold text-ink">—</p>
+                </div>
+                <div className="rounded-2xl border border-ink/10 bg-white/70 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-ink-muted">Comfort</p>
+                  <p className="mt-2 text-lg font-semibold text-ink">—</p>
+                </div>
+                <div className="rounded-2xl border border-ink/10 bg-white/70 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-ink-muted">Air quality</p>
+                  <p className="mt-2 text-lg font-semibold text-ink">—</p>
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            <div className="rounded-3xl border border-ink/10 bg-surface/80 p-6 shadow-soft">
+              <p className="text-sm text-ink-muted">Recommendation</p>
+              <h2 className="mt-2 text-2xl font-semibold text-ink">Best time today</h2>
+              <p className="mt-4 text-sm text-ink-muted">
+                Low rain chance, comfortable temperature, and cleaner air combine here.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.2em] text-ink-muted">
+                <span className="rounded-full border border-ink/10 bg-white/70 px-3 py-1">
+                  Low wind
+                </span>
+                <span className="rounded-full border border-ink/10 bg-white/70 px-3 py-1">
+                  UV mild
+                </span>
+                <span className="rounded-full border border-ink/10 bg-white/70 px-3 py-1">
+                  AQI 42
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-ink/10 bg-surface/80 p-6 shadow-soft">
+              <p className="text-sm text-ink-muted">Hourly timeline</p>
+              <div className="mt-4 h-36 rounded-2xl border border-dashed border-ink/20 bg-surface-alt/70 flex items-center justify-center">
+                <div className="text-sm text-ink-muted">Search a city to see the hourly timeline here.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+ 
+    </main>
   );
 }
